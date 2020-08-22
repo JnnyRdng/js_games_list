@@ -1,0 +1,40 @@
+body {
+    font-family: Calibri;
+}
+
+ul {
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+li {
+    display: grid;
+    grid-template-rows: 1fr 2fr auto;
+    border: 1px solid black;
+    background: lightblue;
+    padding: 20px;
+}
+
+li>hgroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "title title" "console publisher";
+}
+
+li>hgroup>* {
+    margin: 0px;
+}
+
+hgroup>.title {
+    grid-area: title;
+}
+
+hgroup>.console {
+    grid-area: console;
+}
+
+hgroup>.publisher {
+    grid-area: publisher;
+}

@@ -6,11 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/app.js"></script>
-  <title>Document</title>
+  <title>Games List</title>
 </head>
 
 <body>
-
+  <form id="new-item">
+    <div class="form-item">
+      <label for="title">Title:</label>
+      <input type="text" name="title" id="title" required />
+    </div>
+    <input type="submit" id="submit-btn" />
+  </form>
 </body>
+<h2>My games</h2>
+<ul>
+  <!-- temp li item for planning-->
+  <li>
+    <hgroup>
+      <h2 class="title">Title</h2>
+      <h3 class="console">Console</h3>
+      <h3 class="publisher">Publisher</h3>
+    </hgroup>
+    <main>
+      <h2>User rating</h2>
+      <span class="user-rating">50</span><span>/100 <input type="button" class="increase-rating" value="+" /></span>
+    </main>
+    <footer><input type="button" class="delete-single" value="Delete" /></footer>
+  </li>
+</ul>
 
 </html>
