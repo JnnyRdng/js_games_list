@@ -15,24 +15,29 @@
       <label for="title">Title:</label>
       <input type="text" name="title" id="title" required />
     </div>
+    <div class="form-item">
+      <label for="console">Console:</label>
+      <select id="console" name="console">
+        <option value="PS4">PS4</option>
+        <option value="XBox One">XBox One</option>
+        <option value="Nintendo Switch">Nintendo Switch</option>
+        <option value="Sega Megadrive">Sega Megadrive</option>
+      </select>
+    </div>
+    <div class="form-item">
+      <label for="publisher">Publisher:</label>
+      <input type="text" name="publisher" id="publisher" required />
+    </div>
+    <div class="form-item">
+      <label for="rating">User rating (0-100):</label>
+      <input type="number" min="0" max="100" name="rating" id="rating" value="0" required />
+    </div>
     <input type="submit" id="submit-btn" />
   </form>
 </body>
 <h2>My games</h2>
 <ul>
-  <!-- temp li item for planning-->
-  <li>
-    <hgroup>
-      <h2 class="title">Title</h2>
-      <h3 class="console">Console</h3>
-      <h3 class="publisher">Publisher</h3>
-    </hgroup>
-    <main>
-      <h2>User rating</h2>
-      <span class="user-rating">50</span><span>/100 <input type="button" class="increase-rating" value="+" /></span>
-    </main>
-    <footer><input type="button" class="delete-single" value="Delete" /></footer>
-  </li>
+
 </ul>
 
 </html>
