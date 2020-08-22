@@ -38,4 +38,9 @@ hgroup>.console {
 
 hgroup>.publisher {
     grid-area: publisher;
+    text-align: right;
+}
+
+.user-rating {
+    font-weight: 900;
 }

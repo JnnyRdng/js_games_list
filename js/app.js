@@ -1,19 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("loaded");
-    // newListItem();
-    // newListItem();
     const form = document.querySelector("form");
-    form.addEventListener("submit", newListItem);
+    form.addEventListener("submit", handleFormSubmit);
 });
 
-const newListItem = function (event) {
+const handleFormSubmit = function (event) {
     event.preventDefault();
-    console.log(event);
     const title = event.target.title.value;
     const platform = event.target.console.value;
     const publisher = event.target.publisher.value;
     const rating = event.target.rating.value;
+    newListItem(title, platform, publisher, rating);
+    event.target.reset();
+}
 
+const newListItem = function (title, platform, publisher, rating) {
     const gameList = document.querySelector("ul");
     const li = newElement("li", gameList);
     const hgroup = newElement("hgroup", li);
@@ -23,12 +24,11 @@ const newListItem = function (event) {
     const main = newElement("main", li);
     newElement("h2", main, "User rating");
     newElement("span", main, rating, "user-rating");
-    const span = newElement("span", main, "/100 ");
+    const span = newElement("span", main, "/100 ", "rating-number");
     newInput(span, "button", "+", "increase-rating");
+    newInput(span, "button", "-", "decrease-rating");
     const footer = newElement("footer", li);
     newInput(footer, "button", "Delete", "delete-single");
-
-    event.target.reset();
 }
 
 const newElement = function (kind, parent, content = "", classname) {
