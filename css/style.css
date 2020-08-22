@@ -21,7 +21,7 @@ li {
 li>hgroup {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "title title" "console publisher";
+    grid-template-areas: "title title" "platform publisher";
 }
 
 li>hgroup>* {
@@ -32,8 +32,8 @@ hgroup>.title {
     grid-area: title;
 }
 
-hgroup>.console {
-    grid-area: console;
+hgroup>.platform {
+    grid-area: platform;
 }
 
 hgroup>.publisher {
