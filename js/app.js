@@ -15,23 +15,29 @@ const newListItem = function () {
     newElement("h2", main, "User rating");
     newElement("span", main, 50, "user-rating");
     const span = newElement("span", main, "/100 ");
-    newElement("input", span, "", "increase-rating", "button", "+");
+    newInput(span, "button", "+", "increase-rating");
     const footer = newElement("footer", li);
-    newElement("input", footer, "", "delete-single", "button", "Delete")
+    newInput(footer, "button", "Delete", "delete-single");
 }
 
-const newElement = function (kind, parent, content = "", classname = undefined, type = undefined, value = undefined) {
+const newElement = function (kind, parent, content = "", classname) {
     const el = document.createElement(kind);
     if (classname) {
         el.classList.add(classname);
     }
-    if (type) {
-        el.type = type;
-    }
-    if (value) {
-        el.value = value;
-    }
     el.textContent = content;
+    parent.appendChild(el);
+    return el;
+}
+
+const newInput = function (parent, type, value, classname, name) {
+    const el = document.createElement("input");
+    el.type = type;
+    el.value = value;
+    el.name = name;
+    if (classname) {
+        el.classList.add(classname);
+    }
     parent.appendChild(el);
     return el;
 }
