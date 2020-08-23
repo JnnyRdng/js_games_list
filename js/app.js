@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const populate = document.querySelector("#populate");
     populate.addEventListener("click", handlePopulate);
+    handlePopulate();
 
     const deleteAll = document.querySelector("#delete-all");
     deleteAll.addEventListener("click", handleDeleteAll);
@@ -27,24 +28,25 @@ const handleFormSubmit = function (event) {
     event.target.reset();
 }
 
-const newListItem = function (title, platform, publisher, rating) {
+const newListItem = function (title, publisher, platform, rating) {
     const gameList = document.querySelector("ul");
     if (gameList.innerHTML === "No games in list!") {
         gameList.innerHTML = "";
     }
+    const listClass = ratingClass(rating);
     const li = newElement("li", gameList);
     const hgroup = newElement("hgroup", li);
     newElement("h2", hgroup, title, "title");
     newElement("h3", hgroup, platform, "platform");
     newElement("h3", hgroup, publisher, "publisher");
-    const main = newElement("main", li);
+    const main = newElement("main", li, "", listClass);
     newElement("h2", main, "User rating");
     newElement("span", main, rating, "user-rating");
     const span = newElement("span", main, "/100 ");
-    newInput(span, "button", "+", "increase-rating");
-    newInput(span, "button", "-", "decrease-rating");
+    newInput(span, "button", "+", "increase-rating", increaseRating);
+    newInput(span, "button", "-", "decrease-rating", decreaseRating);
     const footer = newElement("footer", li);
-    newInput(footer, "button", "Delete", "delete-single", undefined, deleteSingleItem);
+    newInput(footer, "button", "Delete", "delete-single", deleteSingleItem);
 }
 
 const newElement = function (kind, parent, content = "", classname) {
@@ -57,7 +59,7 @@ const newElement = function (kind, parent, content = "", classname) {
     return el;
 }
 
-const newInput = function (parent, type, value, classname, name, eventHandler) {
+const newInput = function (parent, type, value, classname, eventHandler, name) {
     const el = document.createElement("input");
     el.type = type;
     el.value = value;
@@ -80,4 +82,39 @@ const deleteSingleItem = function (event) {
 const handleDeleteAll = function () {
     const gameList = document.querySelector("ul");
     gameList.innerHTML = "No games in list!"
+}
+
+const increaseRating = function (event) {
+    const rating = event.target.parentNode.parentNode.querySelector(".user-rating");
+    let number = Number(rating.textContent);
+    number++;
+    if (number > 100) {
+        number = 100;
+    }
+    rating.textContent = number;
+    rating.parentNode.parentNode.querySelector("main").className = ratingClass(number);
+}
+
+const decreaseRating = function (event) {
+    const rating = event.target.parentNode.parentNode.querySelector(".user-rating");
+    let number = Number(rating.textContent);
+    number--;
+    if (number < 0) {
+        number = 0;
+    }
+    rating.textContent = number;
+    rating.parentNode.parentNode.querySelector("main").className = ratingClass(number);
+}
+
+
+const ratingClass = function (rating) {
+    let listClass = "bad";
+    if (rating >= 90) {
+        listClass = "great";
+    } else if (rating >= 60) {
+        listClass = "good";
+    } else if (rating >= 40) {
+        listClass = "ok";
+    }
+    return listClass;
 }

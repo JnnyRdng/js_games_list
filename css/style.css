@@ -13,7 +13,6 @@ li {
     display: grid;
     grid-template-rows: 1fr 2fr auto;
     border: 1px solid black;
-    background: lightblue;
     padding: 20px;
     margin: 10px;
 }
@@ -41,6 +40,30 @@ hgroup>.publisher {
     text-align: right;
 }
 
+main {
+    padding: 10px;
+}
+
+main>h2 {
+    margin: 0px;
+}
+
 .user-rating {
     font-weight: 900;
+}
+
+.bad {
+    border-top: 10px solid #C71E1D;
+}
+
+.ok {
+    border-top: 10px solid #FFB560;
+}
+
+.good {
+    border-top: 10px solid #14617A;
+}
+
+.great {
+    border-top: 10px solid #6BCBB6;
 }
