@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const populate = document.querySelector("#populate");
     populate.addEventListener("click", handlePopulate);
-    handlePopulate();
 
     const deleteAll = document.querySelector("#delete-all");
     deleteAll.addEventListener("click", handleDeleteAll);
@@ -57,7 +56,7 @@ const newListItem = function (title, publisher, platforms, rating) {
     if (platforms.length > 1) {
         const spinner = newElement("h3", hgroup, "Cross platform ▾", ["platform", "spinner"]);
         spinner.addEventListener("click", showAllPlatforms);
-        newPlatformViewer(hgroup, platforms);
+        newPlatformViewer(hgroup, platforms.sort());
     } else {
         newElement("h3", hgroup, platforms, ["platform"]);
     }

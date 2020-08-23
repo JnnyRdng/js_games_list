@@ -4,20 +4,43 @@ body {
 
 form {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "title checkboxes" "publisher checkboxes" "rating checkboxes" "submit submit";
+}
+
+#title-container {
+    grid-area: title;
+}
+
+#platform-container {
+    grid-area: checkboxes;
+}
+
+#plublisher-container {
+    grid-area: publisher;
+}
+
+#rating-container {
+    grid-area: rating;
+}
+
+#submit-btn {
+    grid-area: submit;
 }
 
 ul {
     list-style: none;
     padding: 0px;
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 li {
     display: grid;
     grid-template-rows: 1fr auto auto;
-    border: 1px solid black;
+    border: 1px solid #a3a3a3;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px #a3a3a3;
     padding: 20px;
     margin: 10px;
 }
@@ -41,10 +64,10 @@ hgroup>.platform {
     text-align: right;
 }
 
-/* #platform {
+#checkbox-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-} */
+    grid-template-columns: 1fr 1fr 1fr;
+}
 
 .platform-section {
     grid-area: section;
