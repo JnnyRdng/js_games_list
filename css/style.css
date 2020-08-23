@@ -2,6 +2,11 @@ body {
     font-family: Calibri;
 }
 
+form {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
 ul {
     list-style: none;
     padding: 0px;
@@ -20,7 +25,7 @@ li {
 li>hgroup {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "title title" "publisher platform";
+    grid-template-areas: "title title" "publisher platform" "section section";
 }
 
 li>hgroup>* {
@@ -34,6 +39,22 @@ hgroup>.title {
 hgroup>.platform {
     grid-area: platform;
     text-align: right;
+}
+
+/* #platform {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+} */
+
+.platform-section {
+    grid-area: section;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.platform-section>p {
+    margin: 0px;
+    text-align: center;
 }
 
 hgroup>.publisher {

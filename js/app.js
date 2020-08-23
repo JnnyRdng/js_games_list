@@ -92,9 +92,11 @@ const newPlatformViewer = function (parent, platforms) {
 const showAllPlatforms = function (event) {
     const platformSection = event.target.parentNode.querySelector("section");
     if (platformSection.style.display === "none") {
-        platformSection.style.display = "block";
+        platformSection.style.display = "grid";
+        event.target.textContent = "Cross platform ⁃"
     } else {
         platformSection.style.display = "none";
+        event.target.textContent = "Cross platform ▾"
     }
 }
 
