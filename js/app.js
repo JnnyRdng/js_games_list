@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.querySelector("form");
     form.addEventListener("submit", handleFormSubmit);
+
+    const inputToggle = document.querySelector("#other-checkbox");
+    inputToggle.addEventListener("input", handleToggleInput);
 });
 
 const handlePopulate = function () {
@@ -21,14 +24,27 @@ const handlePopulate = function () {
 const handleFormSubmit = function (event) {
     event.preventDefault();
     const title = event.target.title.value;
-    const platform = event.target.platform.value;
+    const platforms = getPlatforms(event.target.platform);
     const publisher = event.target.publisher.value;
     const rating = event.target.rating.value;
-    newListItem(title, platform, publisher, rating);
+    console.log(platforms);
+    newListItem(title, publisher, platforms, rating);
     event.target.reset();
 }
 
-const newListItem = function (title, publisher, platform, rating) {
+const getPlatforms = function (fieldset) {
+    const inputs = [...fieldset.elements];
+    const filtered = inputs.filter(el => el.checked && el.id !== "other-checkbox").map(el => el.value);
+    if (inputs[inputs.length - 2].checked) {
+        const extras = document.querySelector("#other-input").value.split(",");
+        extras.forEach((el) => {
+            filtered.push(el.trim());
+        });
+    }
+    return filtered;
+}
+
+const newListItem = function (title, publisher, platforms, rating) {
     const gameList = document.querySelector("ul");
     if (gameList.innerHTML === "No games in list!") {
         gameList.innerHTML = "";
@@ -36,27 +52,50 @@ const newListItem = function (title, publisher, platform, rating) {
     const listClass = ratingClass(rating);
     const li = newElement("li", gameList);
     const hgroup = newElement("hgroup", li);
-    newElement("h2", hgroup, title, "title");
-    newElement("h3", hgroup, platform, "platform");
-    newElement("h3", hgroup, publisher, "publisher");
+    newElement("h2", hgroup, title, ["title"]);
+    newElement("h3", hgroup, publisher, ["publisher"]);
+    if (platforms.length > 1) {
+        const spinner = newElement("h3", hgroup, "Cross platform ▾", ["platform", "spinner"]);
+        spinner.addEventListener("click", showAllPlatforms);
+        newPlatformViewer(hgroup, platforms);
+    } else {
+        newElement("h3", hgroup, platforms, ["platform"]);
+    }
     const main = newElement("main", li, "", listClass);
     newElement("h2", main, "User rating");
-    newElement("span", main, rating, "user-rating");
+    newElement("span", main, rating, ["user-rating"]);
     const span = newElement("span", main, "/100 ");
-    newInput(span, "button", "+", "increase-rating", increaseRating);
-    newInput(span, "button", "-", "decrease-rating", decreaseRating);
+    newInput(span, "button", "+", ["increase-rating"], increaseRating);
+    newInput(span, "button", "-", ["decrease-rating"], decreaseRating);
     const footer = newElement("footer", li);
-    newInput(footer, "button", "Delete", "delete-single", deleteSingleItem);
+    newInput(footer, "button", "Delete", ["delete-single"], deleteSingleItem);
 }
 
 const newElement = function (kind, parent, content = "", classname) {
     const el = document.createElement(kind);
     if (classname) {
-        el.classList.add(classname);
+        el.classList.add(...classname);
     }
     el.textContent = content;
     parent.appendChild(el);
     return el;
+}
+
+const newPlatformViewer = function (parent, platforms) {
+    const section = newElement("section", parent, "", ["platform-section"]);
+    section.style.display = "none";
+    platforms.forEach((platform) => {
+        newElement("p", section, platform);
+    });
+}
+
+const showAllPlatforms = function (event) {
+    const platformSection = event.target.parentNode.querySelector("section");
+    if (platformSection.style.display === "none") {
+        platformSection.style.display = "block";
+    } else {
+        platformSection.style.display = "none";
+    }
 }
 
 const newInput = function (parent, type, value, classname, eventHandler, name) {
@@ -77,6 +116,10 @@ const newInput = function (parent, type, value, classname, eventHandler, name) {
 const deleteSingleItem = function (event) {
     const listItem = event.target.parentNode.parentNode;
     listItem.parentNode.removeChild(listItem);
+    const gameList = document.querySelector("ul");
+    if (gameList.innerHTML === "") {
+        gameList.innerHTML = "No games in list!";
+    }
 }
 
 const handleDeleteAll = function () {
@@ -116,5 +159,11 @@ const ratingClass = function (rating) {
     } else if (rating >= 40) {
         listClass = "ok";
     }
-    return listClass;
+    return [listClass];
+}
+
+const handleToggleInput = function (event) {
+    const input = document.querySelector("#other-input");
+    input.disabled = !event.target.checked;
+    input.focus();
 }

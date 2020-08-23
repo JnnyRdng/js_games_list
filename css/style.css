@@ -11,7 +11,7 @@ ul {
 
 li {
     display: grid;
-    grid-template-rows: 1fr 2fr auto;
+    grid-template-rows: 1fr auto auto;
     border: 1px solid black;
     padding: 20px;
     margin: 10px;
@@ -20,7 +20,7 @@ li {
 li>hgroup {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "title title" "platform publisher";
+    grid-template-areas: "title title" "publisher platform";
 }
 
 li>hgroup>* {
@@ -33,15 +33,22 @@ hgroup>.title {
 
 hgroup>.platform {
     grid-area: platform;
+    text-align: right;
 }
 
 hgroup>.publisher {
     grid-area: publisher;
-    text-align: right;
+}
+
+.spinner {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 main {
     padding: 10px;
+    padding-top: 0px;
+    margin-top: 10px;
 }
 
 main>h2 {

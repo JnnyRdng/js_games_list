@@ -17,13 +17,48 @@
       <input type="text" name="title" id="title" required />
     </div>
     <div class="form-item">
-      <label for="platform">Platform:</label>
+      <!-- <label for="platform">Platform:</label>
       <select id="platform" name="platform">
         <option value="PS4">PS4</option>
         <option value="Xbox One">XBox One</option>
         <option value="Nintendo Switch">Switch</option>
         <option value="Sega Megadrive">Megadrive</option>
-      </select>
+      </select> -->
+      <fieldset id="platform" form="new-item">
+        <legend>Platform(s)</legend>
+        <div>
+          <input type="checkbox" name="3DS" value="3DS" />
+          <label for="3DS">3DS</label>
+        </div>
+        <div>
+          <input type="checkbox" name="PC" value="PC" />
+          <label for="PC">PC</label>
+        </div>
+        <div>
+          <input type="checkbox" name="Playstation" value="Playstation" />
+          <label for="Playstation">Playstation</label>
+        </div>
+        <div>
+          <input type="checkbox" name="PS4" value="PS4" />
+          <label for="PS4">PS4</label>
+        </div>
+        <div>
+          <input type="checkbox" name="Switch" value="Switch" />
+          <label for="Switch">Switch</label>
+        </div>
+        <div>
+          <input type="checkbox" name="Wii" value="Wii" />
+          <label for="Wii">Wii</label>
+        </div>
+        <div>
+          <input type="checkbox" name="Xbox-One" value="Xbox One" />
+          <label for="Xbox-One">Xbox One</label>
+        </div>
+        <div>
+          <input type="checkbox" name="Other" id="other-checkbox" />
+          <input type=" text" name="otherInput" placeholder="Other" id="other-input" disabled />
+        </div>
+      </fieldset>
     </div>
     <div class="form-item">
       <label for="publisher">Publisher:</label>
